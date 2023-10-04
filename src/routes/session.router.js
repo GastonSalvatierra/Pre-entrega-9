@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import userModel from '../services/db/models/user.js';
+import userModel from '../models/db/user.js';
 import { isValidPassword , createHash } from '../utils.js';
 import passport from 'passport';
 

@@ -1,5 +1,5 @@
 import GitHubStrategy from "passport-github2";
-import userModel from "../services/db/models/user.js";
+import userModel from "../models/db/user.js";
 import passport from "passport";
 
 

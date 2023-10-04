@@ -7,7 +7,7 @@ import viewsRouter from './routes/views.router.js';
 import __dirname from './utils.js';
 import mongoose from 'mongoose';
 import { Server } from 'socket.io';
-import MessageModel from './services/db/models/message.js';
+import MessageModel from './models/db/message.js';
 import session from 'express-session';
 import sessionRouter from './routes/session.router.js'
 import githubLoginViewRouter from './routes/github-login.views.router.js'

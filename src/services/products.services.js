@@ -1,5 +1,5 @@
-import productsModel from "./models/products.js";
-import userModel from "./models/user.js";
+import productsModel from "../models/db/products.js";
+import userModel from "../models/db/user.js";
 
 export default class productService{
 
