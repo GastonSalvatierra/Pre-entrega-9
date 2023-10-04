@@ -5,16 +5,18 @@ import {getProductsLimit,getProductsPage,postProducts,getProductsLimit10,postPro
 
 
 
-
+//GET
 router.get('/', getProductsLimit);
 
 router.get('/pages/:page', getProductsPage);
 
 
+//POST
 router.post('/pages/:page', postProducts );
 
 
 //CORRESPONDE A LA ENTREGA ANTERIOR
+
 
 //GET
 
@@ -28,7 +30,7 @@ router.post('/', postProductsSave)
 
 router.put('/:pid', putProducts);
 
-//PUT
+//DELETE
 
 router.delete('/:pid', deleteProducts);
 
@@ -36,8 +38,6 @@ router.delete('/:pid', deleteProducts);
 
 
 export default router;
-
-
 
 
 
@@ -77,7 +77,6 @@ if (nuevoArray.length > 0) {
 
 //ruta get "/"
 
-
 /* router.get('/', (req, res) => {
   const products = nuevoArray;
   const limit = parseInt(req.query.limit);
@@ -94,7 +93,6 @@ if (nuevoArray.length > 0) {
 }); */
 
 
-
 //ruta get /:pid
 
 /* router.get('/:pid', (req, res) => {
@@ -109,7 +107,6 @@ if (nuevoArray.length > 0) {
   }
 
 }); */
-
 
 
 // Ruta POST "/"

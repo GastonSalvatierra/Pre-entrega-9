@@ -1,158 +1,29 @@
 //import fs from 'fs';
 import { Router } from "express";
 const router = Router();
-import cartService from '../services/carts.services.js'
-
-const cartServices = new cartService();
-
+import {getCart,getCartId,postCart,deleteCart,deleteCartId,putCart,putCartPid} from '../controllers/carts.controller.js'
 
 //GET
+router.get('/', getCart )
 
-
-router.get('/',async(req,res)=>{
-    try {
-        let carts = await cartServices.getAll();
-        res.send(carts);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({error:  error, message: "No se pudo obtener el carrito."});
-    }
-    
-})
-
-
-
-router.get('/:cid',async(req,res)=>{
-    try {
-        let cartId = req.params.cid;
-
-        if (!cid) {
-            return res.status(400).send({ message: "El parámetro cid es inválido" });
-          }
-        
-        let carts = await cartServices.updateCartPopulate(cartId);
-        res.send(carts);
-        
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({error:  error, message: "No se pudo obtener el carrito."});
-    }
-    
-})
-
+router.get('/:cid', getCartId )
 
 //POST
-router.post('/',async(req,res)=>{
-    const carts = req.body
-    if (!carts) {
-        return res.status(400).send({ message: "El parámetro cid es inválido" });
-      }
-    
-    try {
-        let result = await cartServices.save(carts);
-        res.status(201).send(result);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({error:  error, message: "No se pudo guardar el carrito."});
-    }
-})
+router.post('/', postCart )
 
+//PUT
+router.put('/:cid', putCart )
 
-router.delete('/:cid/products/:pid',async(req,res)=>{
-    
-    const cartId = req.params.cid;
-    const productId = req.params.pid;
-    if (!cartId || !productId) {
-        return res.status(400).send({ message: "El parámetro cid es inválido" });
-      }
+router.put('/:cid/carts/:pid', putCartPid )
 
-    try {
-        let result = await cartServices.deleteCart(cartId, productId);
-        res.status(201).send("producto eliminado correctamente");
+//DELETE
+router.delete('/:cid/products/:pid', deleteCart )
 
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({error:  error, message: "No se pudo eliminar el carrito."});
-    }
-})
-
-
-
-
-
-router.delete('/:cid',async(req,res)=>{
-    
-    const cartId = req.params.cid 
-    if (!cartId) {
-        return res.status(400).send({ message: "El parámetro cid es inválido" });
-      }
-    
-
-    try {
-        let result = await cartServices.deleteAll(cartId);
-        res.status(201).send("productos eliminados correctamente");
-        console.log(result);
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({error:  error, message: "No se pudieron eliminar los productos."});
-    }
-})
-
-
-
-
-router.put('/:cid',async(req,res)=>{
-    const cartId = req.params.cid;
-    const updateProducts = req.body;
-    if (!cartId || !updateProducts) {
-        return res.status(400).send({ message: "El parámetro cid es inválido" });
-      }
-    
-    try {
-        let result = await cartServices.updateAll(cartId, updateProducts);
-        res.status(201).send("carrito actualizado con exito");
-        console.log(result);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({error:  error, message: "No se pudo actualizar el carrito."});
-    }
-})
-
-
-
-router.put('/:cid/carts/:pid',async(req,res)=>{
-    const cartId = req.params.cid;
-    const productId = req.params.pid;
-    const {quantity} = req.body;
-
-    if (!cartId|| !productId ||!quantity) {
-        return res.status(400).send({ message: "El parámetro cid es inválido" });
-      }
-    
-
-    try {
-        console.log(quantity);
-        let result = await cartServices.updateQuantity(cartId,productId,quantity);
-        res.status(201).send("cantidad actulizada con exito");
-        console.log(result);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({error:  error, message: "No se pudo guardar el carrito."});
-    }
-})
-
-
-
+router.delete('/:cid', deleteCartId )
 
 
 
 export default router;
-
-
-
-
-
 
 
 /* const crearArchivo = async () => {
